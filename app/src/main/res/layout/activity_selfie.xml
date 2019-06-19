@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SelfieActivity"
+    android:id="@+id/root_view"
+    android:background="@color/colorBlack"
+    android:padding="0dp"
+    android:layout_margin="0dp">
+
+    <com.example.camerabioexample_android.camerabiomanager.camera.AutoFitTextureView
+        android:id="@+id/texture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Capture Stillshot Button -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/cam_widget_margin_bottom"
+        android:padding="@dimen/cam_content_inset_primary"
+        android:background="@drawable/circle_opaque"
+        android:id="@+id/capture_button_container">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:background="@drawable/circle_white"
+            android:layout_centerInParent="true"
+            android:id="@+id/capture_button_secondary_container">
+
+            <ImageButton
+                android:id="@+id/take_picture"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/cam_circle_selector"
+                android:padding="@dimen/cam_content_inset_secondary"
+                android:scaleType="fitXY"
+                android:src="@drawable/cam_action_stillshot"
+                tools:ignore="ContentDescription"
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/rectangle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rectangle"/>
+
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorWhite" />
+
+    <View
+        android:id="@+id/lineTop"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorWhite" />
+
+    <View
+        android:id="@+id/lineLeft"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorWhite" />
+
+    <View
+        android:id="@+id/lineRight"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorWhite"
+        android:gravity="right" />
+
+
+    <TextView
+        android:id="@+id/tvCountdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="3"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:alpha="0.7"
+        android:textColor="@color/colorGreyDark"
+        android:textSize="120sp" />
+
+</RelativeLayout>

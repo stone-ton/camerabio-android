@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "196807496090",
+    "firebase_url": "https://camerabio-android.firebaseio.com",
+    "project_id": "camerabio-android",
+    "storage_bucket": "camerabio-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196807496090:android:a49ec226e011280c",
+        "android_client_info": {
+          "package_name": "com.example.camerabioexample_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196807496090-12de9cd7i1m04cph782c77lim17oca4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNdKdpd1oL5rtflA8KTrQsYMLbWXd4aqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196807496090-12de9cd7i1m04cph782c77lim17oca4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

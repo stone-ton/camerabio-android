@@ -1,0 +1,77 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="margin_logo_acesso">10dp</dimen>
+    <dimen name="margin_source">10dp</dimen>
+    <dimen name="source_size">20dp</dimen>
+    <dimen name="margin_sub_text">8dp</dimen>
+
+    <dimen name="splash_acesso_bio_margin_bottom">186dp</dimen>
+    <dimen name="splash_text2_margin_bottom">120dp</dimen>
+    <dimen name="splash_acesso_bio_size">24dp</dimen>
+    <dimen name="splash_text2_size">16dp</dimen>
+
+    <dimen name="splash_padding">20dp</dimen>
+
+    <dimen name="change_camera_button_padding">6dp</dimen>
+    <dimen name="change_camera_button_margin_top">28dp</dimen>
+    <dimen name="enable_flash_button_margin_top">10dp</dimen>
+    <dimen name="change_camera_button_margin_start">36dp</dimen>
+
+    <dimen name="take_picture_button_margin_end">42dp</dimen>
+    <dimen name="switch_camera_button_margin_bottom">42dp</dimen>
+    <dimen name="switch_camera_button_margin_end">54dp</dimen>
+    <dimen name="switch_camera_button_margin_top">28dp</dimen>
+
+    <dimen name="take_picture_button_margin_end_portrait">6dp</dimen>
+    <dimen name="switch_camera_button_margin_bottom_portrait">6dp</dimen>
+    <dimen name="switch_camera_button_margin_end_portrait">18dp</dimen>
+
+    <dimen name="text_luminance_margin_bottom">16dp</dimen>
+
+    <dimen name="size_primary">68dp</dimen>
+    <dimen name="size_secondary">42dp</dimen>
+
+    <dimen name="text_luminance_size">20dp</dimen>
+
+    <dimen name="linear_layout_face_frame_padding">4dp</dimen>
+
+    <dimen name="preview_margin_bottom">16dp</dimen>
+
+    <dimen name="margin_fragment">8dp</dimen>
+    <dimen name="margin_scroll_side">8dp</dimen>
+    <dimen name="padding_bottom">8dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="linear_layout_padding">8dp</dimen>
+    <dimen name="button_next_margin_top">18dp</dimen>
+
+    <dimen name="capture_button_width">60dp</dimen>
+    <dimen name="capture_button_height">60dp</dimen>
+
+    <!-- Dimen of custom dialog -->
+    <dimen name="alert_width">290dp</dimen>
+    <dimen name="common_circle_width">3dp</dimen>
+    <dimen name="progress_circle_radius">34dp</dimen>
+
+    <!-- Navigation Drawer -->
+    <dimen name="nav_header_vertical_spacing">24dp</dimen>
+    <dimen name="nav_header_height">170dp</dimen>
+
+    <!-- Button Padding-->
+    <dimen name="button_padding">4dp</dimen>
+
+    <dimen name="package_text_size">8pt</dimen>
+    <dimen name="package_margin_bottom">2dp</dimen>
+
+    <dimen name="cam_widget_margin_bottom">20dp</dimen>
+    <dimen name="cam_widget_margin_top">30dp</dimen>
+    <dimen name="cam_widget_margin_right">10dp</dimen>
+    <dimen name="cam_widget_margin_left">10dp</dimen>
+    <dimen name="cam_widget_margin_top_sides">35dp</dimen>
+
+    <dimen name="cam_content_inset_primary">8dp</dimen>
+    <dimen name="cam_content_inset_secondary">10dp</dimen>
+    <dimen name="cam_content_inset">16dp</dimen>
+    <dimen name="cam_content_inset_double">32dp</dimen>
+</resources>

@@ -1,0 +1,85 @@
+<resources>
+
+    <!-- General -->
+    <string name="app_name">camerabioexample-android</string>
+
+
+    <string name="action_settings">Configurações</string>
+    <string name="register">Cadastro</string>
+    <string name="product">Escolha o produto</string>
+
+    <string name="nav_header_title">Fulano de Tal</string>
+    <string name="nav_header_subtitle">fulano@acessodigital.com.br</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+
+    <!-- Info Activity -->
+    <string name="info">Para sua própria segurança e agilidade nas suas compras, precisamos de uma foto do seu rosto. Porém fique tranquilo, não mostraremos para ninguém.</string>
+    <string name="info_title">Agora só falta uma selfie</string>
+
+    <!-- Intro Activity-->
+    <string name="bio_instructions">Instruções para a biometria</string>
+    <string name="bio_instructions_description">Olá, neste momento será iniciado o\nprocesso de biometria facial.\n Siga as minhas instruções.</string>
+
+    <string name="bio_glasses">Óculos</string>
+    <string name="bio_glasses_description">Se você estiver utilizando óculos\nde sol ou grau, tire por favor,\nassim podemos identificar\nmelhor seus olhos.</string>
+
+    <string name="bio_cap">Boné ou chapéu</string>
+    <string name="bio_cap_description">Se você estiver utilizando boné ou chapeú,\ntire por favor, assim podemos\nidentificar melhor seu rosto.</string>
+
+    <string name="bio_position">Posicione o celular</string>
+    <string name="bio_position_description">Escolha um lugar com boa iluminação,\nsegure o celular na altura dos olhos,\nposicione o rosto dentro do desenho\nque irá aparecer na tela e\naperte o botão de captura.</string>
+
+    <!-- Custom Dialog -->
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading...</string>
+
+    <string name="yes">SIM</string>
+    <string name="understood">OK, ENTENDI</string>
+    <string name="no">NÃO</string>
+    <string name="wait">Aguarde...</string>
+
+    <!-- Form Activity -->
+    <string name="error_field_required">Preencha este campo</string>
+    <string name="error_invalid_cpf">CPF informado é inválido</string>
+    <string name="error_invalid_email">E-mail informado é inválido</string>
+    <string name="error_invalid_celular">Celular informado é inválido</string>
+    <string name="male">Masculino</string>
+    <string name="female">Feminino</string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Fechar</string>
+    <string name="acesso_bio">Acesso BIO</string>
+    <string name="cadastro_da_selfie">Cadastro da Selfie</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nome">Nome</string>
+    <string name="cpf">CPF</string>
+    <string name="e_mail">E-mail</string>
+    <string name="telefone">Telefone</string>
+    <string name="genero">Gênero</string>
+    <string name="produtos">Produtos</string>
+    <string name="cadastrar_selfie">Cadastrar Selfie</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="new_selfie">Nova Selfie</string>
+    <string name="sair">Sair</string>
+    <string name="liveness">Liveness</string>
+    <string name="captura_automatica">Captura Automática</string>
+    <string name="captura_automatica_desc">Tempo em segundos para captura da selfie</string>
+    <string name="glasses">Glasses</string>
+    <string name="nao_ha">NÃO HÁ</string>
+    <string name="ninguem">NINGUÉM</string>
+    <string name="igual_a_voce">IGUAL A VOCÊ</string>
+    <string name="biometria">Biometria</string>
+    <string name="login_pergunta">Não tem uma conta?</string>
+    <string name="cadastre_se">Cadastre-se!</string>
+    <string name="tirar_foto">Tirar foto</string>
+    <string name="camera_error">Este dispositivo não suporta a API Camera 2.</string>
+    <string name="request_camera_permission">Este aplicativo necessita de permissão à câmera</string>
+
+
+</resources>
