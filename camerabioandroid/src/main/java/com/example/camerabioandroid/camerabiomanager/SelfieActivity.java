@@ -1,14 +1,10 @@
-package com.example.camerabioexample_android.camerabiomanager;
+package com.example.camerabioandroid.camerabiomanager;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import androidx.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,10 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 
-import com.example.camerabioexample_android.R;
-import com.example.camerabioexample_android.camerabiomanager.camera.CaptureImageProcessor;
-import com.example.camerabioexample_android.camerabiomanager.camera.ImageProcessor;
+
+import com.example.camerabioandroid.R;
+import com.example.camerabioandroid.camerabiomanager.camera.CaptureImageProcessor;
+import com.example.camerabioandroid.camerabiomanager.camera.ImageProcessor;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -560,14 +558,11 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.take_picture: {
-                destroyTimer();
-                countDownCancelled[0] = Boolean.TRUE;
-                isRequestImage = true;
-                super.takePicture();
-                break;
-            }
+        if (view.getId() == R.id.take_picture) {
+            destroyTimer();
+            countDownCancelled[0] = Boolean.TRUE;
+            isRequestImage = true;
+            super.takePicture();
         }
     }
 

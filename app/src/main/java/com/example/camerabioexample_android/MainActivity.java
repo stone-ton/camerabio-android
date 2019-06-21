@@ -13,7 +13,7 @@ import com.example.camerabioexample_android.camerabiomanager.CameraBioManager;
 public class MainActivity extends AppCompatActivity implements CallbackCameraBio {
 
     protected static final int REQUEST_CAMERA_PERMISSION = 1;
-
+    Button bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +37,16 @@ public class MainActivity extends AppCompatActivity implements CallbackCameraBio
     protected void onResume() {
         super.onResume();
 
-
     }
 
     @Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-        super.startActivityForResult(intent, requestCode);
-
-
-    }
-
-    @Override
-        public void onSuccessCapture(String base64) {
-
+    public void onSuccessCapture(String base64) {
+            bt.setText("PRONTO");
     }
 
     @Override
     public void onFailedCapture(String description) {
 
     }
+
 }

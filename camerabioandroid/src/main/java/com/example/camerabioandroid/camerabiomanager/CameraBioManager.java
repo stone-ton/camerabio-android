@@ -1,12 +1,9 @@
-package com.example.camerabioexample_android.camerabiomanager;
+package com.example.camerabioandroid.camerabiomanager;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
