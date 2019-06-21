@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements CallbackCameraBio
     }
 
     @Override
-    public void onSuccessCapture(String base64) {
+        public void onSuccessCapture(String base64) {
 
     }
 

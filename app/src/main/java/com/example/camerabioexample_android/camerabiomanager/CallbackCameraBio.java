@@ -1,6 +1,8 @@
 package com.example.camerabioexample_android.camerabiomanager;
 
-public interface CallbackCameraBio {
+import java.io.Serializable;
+
+public interface CallbackCameraBio extends Serializable {
 
     public void onSuccessCapture(String base64);
     public void onFailedCapture(String description);

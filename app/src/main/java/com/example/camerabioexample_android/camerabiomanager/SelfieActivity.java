@@ -3,6 +3,7 @@ package com.example.camerabioexample_android.camerabiomanager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -40,6 +41,10 @@ import java.util.concurrent.TimeUnit;
 
 
 public class SelfieActivity extends Camera2Base implements ImageProcessor, CaptureImageProcessor {
+
+    private  CameraBioManager cameraBioManager;
+
+
 
     public static final float COMPENSATION_EYE = 0.05f;
     public static int total = 0;
@@ -139,6 +144,9 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
         super.onCreate(savedInstanceState);
 
         Bundle b = getIntent().getExtras();
+        cameraBioManager = (CameraBioManager) b.getParcelable("CLASS");
+
+        CallbackCameraBio callbackCameraBio = cameraBioManager.cbc;
 
 
         if (b != null) {
@@ -199,6 +207,9 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
         activity.finish();
     }
 
+    public void setCameraBioManager(CameraBioManager cameraBioManager) {
+        this.cameraBioManager = cameraBioManager;
+    }
 
     @Override
     public void process(byte[] image, final int w, final int h, int f) {
@@ -564,11 +575,7 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
 
         if (base64 != null) {
 
-
-            Intent returnIntent = new Intent();
-            returnIntent.putExtra("result",base64);
-            setResult(Activity.RESULT_OK,returnIntent);
-            finish();
+            this.cameraBioManager.capture(base64);
 
         } else {
             showErrorMessage("Erro ao recuperar imagem capturada");
