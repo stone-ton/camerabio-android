@@ -102,18 +102,18 @@ public void onFailedCaptureDocument(String description) {
 
 ## Construido com
 
-* [Retrofit](https://firebase.google.com/docs/ml-kit/?hl=pt-br) - Framework para suporte REST
+* [Retrofit](https://square.github.io/retrofit/) - Framework para suporte REST
 
 
 ## Versionamento
 
-Nós usamos [Github](https://github.com/) para versionar. Para as versões disponíveis, veja as [tags do repositório](https://github.com/acesso-io/acessobio-camerabio/releases). 
+Nós usamos [Github](https://github.com/) para versionar. Para as versões disponíveis, veja as [tags do repositório](https://github.com/acesso-io/camerabio-android/releases). 
 
 ## Autores
 
 * **Matheus Domingos** - *Engenheiro Mobile* - [GitHub](https://github.com/MatheusDomingos)
 
-Veja também nossa lista de [contribuidores](https://github.com/your/project/contributors) que participaram deste projeto.
+Veja também nossa lista de [contribuidores](https://github.com/acesso-io/camerabio-android/graphs/contributors) que participaram deste projeto.
 
 ## Licença
 
