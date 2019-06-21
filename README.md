@@ -25,6 +25,13 @@ allprojects {
 }
 ```
 
+- Adicione suporte ao AndroidX ao seu arquivo build.properties:
+```
+android.useAndroidX=true
+android.enableJetifier=true
+````
+Se faz necessário para uma melhor performance e funcionamento do frame de captura
+
 - Em seguida, abra o arquivo build.gradle (Modulo) e adicione nossa dependência ao seu projeto: 
 
 ```
