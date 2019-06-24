@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SelfieActivity"
+    tools:context=".camerabiomanager.SelfieActivity"
     android:id="@+id/root_view"
     android:background="@color/colorBlack"
     android:padding="0dp"
     android:layout_margin="0dp">
 
-    <com.example.camerabioexample_android.camerabiomanager.camera.AutoFitTextureView
+    <com.example.camerabioandroid.camerabiomanager.camera.AutoFitTextureView
         android:id="@+id/texture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
