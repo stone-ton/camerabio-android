@@ -1,4 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.camerabioandroid" />
+    package="com.example.camerabioandroid" >
 
+<application>
+
+    <activity
+        android:name=".camerabiomanager.SelfieActivity"
+        android:screenOrientation="portrait"
+        android:noHistory="true"
+        android:theme="@style/AppTheme.NoActionBar" />
+
+</application>
+
+
+</manifest>
 
