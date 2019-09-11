@@ -10,6 +10,7 @@ Estas instruções farão com que você consiga implementar a câmera com engenh
 
 - Android Studio - IDE oficial de desenvolvimento Google. Versão 9 ou superior
 - Maven Jitpack - Gerenciador de bibiotecas para a IDE.
+- Precisamos também do arquivo googleservices.json referente ao seu projeto. Crie e adicione na pasta app do seu diretório. Precisa de ajuda? Segue o link: [Google Console](https://console.firebase.google.com)   
 
 ### Instalando
 
