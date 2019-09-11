@@ -460,21 +460,24 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
         boolean portrait = isPortrait(getScreenOrientation());
 
         // Utilizado a proporção ideal para biometria
-        List<Size> sizeJpegList = Arrays.asList(map.getOutputSizes(ImageFormat.JPEG));
-
         jpegSize = ImageSize.chooseOptimalJpegSize(
-                sizeJpegList,
+                Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
                 BIOMETRY_IMAGE_WIDTH,
-                BIOMETRY_IMAGE_HEIGHT,
-                portrait);
+                BIOMETRY_IMAGE_HEIGHT);
+
 
         // proporção ideal para tela
         previewSize = ImageSize.getOptimalPreviewSize(
                 map.getOutputSizes(SurfaceTexture.class),
                 width,
                 height,
-                facing,
-                portrait);
+                facing);
+
+//        if(previewSize.getWidth() == 1440 && previewSize.getHeight() == 720) {
+//            previewSize = new Size(1280, 720);
+//        }
+
+
     }
 
     private void loadOrientations(CameraCharacteristics characteristics) {
@@ -758,7 +761,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
     }
 
     /**
-     * Configures the necessary {@link Matrix} transformation to `textureView`.
+     * Configures the necessary {@link android.graphics.Matrix} transformation to `textureView`.
      * This method should be called after the camera preview size is determined in
      * setUpCameraOutputs and also the size of `textureView` is fixed.
      *
@@ -909,7 +912,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 String base64 = ImageUtils.toBase64JPEG(bitmap, false);
                 bitmap = null;
 
-                 captureImageProcessor.capture(base64);
+                captureImageProcessor.capture(base64);
                 base64 = null;
 
             } catch (Exception ex) {

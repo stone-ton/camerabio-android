@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "983240963708",
+    "firebase_url": "https://testcamerabio-androd.firebaseio.com",
+    "project_id": "testcamerabio-androd",
+    "storage_bucket": "testcamerabio-androd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983240963708:android:9d6ad21ef978bcf3",
+        "android_client_info": {
+          "package_name": "com.example.testcamerabio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983240963708-jh08kik51hgvon7nucsmllk681keghus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBniaa-z-tNPtM7ZEmHXG5Wz1Ps-jtBME0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983240963708-jh08kik51hgvon7nucsmllk681keghus.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
