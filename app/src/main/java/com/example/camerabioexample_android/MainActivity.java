@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements CallbackCameraBio
     }
 
     @Override
+    public void onSuccessCaptureDocument(String base64) {
+
+    }
+
+    @Override
     public void onSuccessCapture(String base64) {
             bt.setText("PRONTO");
     }
