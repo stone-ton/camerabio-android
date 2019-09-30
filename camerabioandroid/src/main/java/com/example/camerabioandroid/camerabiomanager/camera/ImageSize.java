@@ -125,7 +125,7 @@ public class ImageSize {
                     minDiff = Math.abs(size.getHeight() - targetHeight);
                 }
             }
-            ASPECT_TOLERANCE += 0.1f;
+           // ASPECT_TOLERANCE += 0.1f;
         }
 
         if(optimalSize.getHeight() > 1024) {

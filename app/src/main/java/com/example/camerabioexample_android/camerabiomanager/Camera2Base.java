@@ -317,13 +317,17 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 case STATE_WAITING_PRECAPTURE: {
 
                     // CONTROL_AE_STATE can be null on some devices
-                    Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
+//                    Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
+//
+//                    if (aeState == null
+//                            || aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE
+//                            || aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
+//                        state = STATE_WAITING_NON_PRECAPTURE;
+//                    }
 
-                    if (aeState == null
-                            || aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE
-                            || aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
-                        state = STATE_WAITING_NON_PRECAPTURE;
-                    }
+                    state = STATE_WAITING_NON_PRECAPTURE;
+
+
                     break;
                 }
                 case STATE_WAITING_NON_PRECAPTURE: {
@@ -396,7 +400,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 // We don't use a front facing camera in this sample.
                 facing = characteristics.get(CameraCharacteristics.LENS_FACING);
 
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
                     continue;
                 }
 
@@ -475,6 +479,9 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
 //        if(previewSize.getWidth() == 1440 && previewSize.getHeight() == 720) {
 //            previewSize = new Size(1280, 720);
 //        }
+
+
+        previewSize = new Size(1280, 720);
 
 
     }

@@ -12,44 +12,11 @@
 
     <com.example.camerabioexample_android.camerabiomanager.camera.AutoFitTextureView
         android:id="@+id/texture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- Capture Stillshot Button -->
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/cam_widget_margin_bottom"
-        android:padding="@dimen/cam_content_inset_primary"
-        android:background="@drawable/circle_opaque"
-        android:id="@+id/capture_button_container">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:background="@drawable/circle_white"
-            android:layout_centerInParent="true"
-            android:id="@+id/capture_button_secondary_container">
-
-            <ImageButton
-                android:id="@+id/take_picture"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/cam_circle_selector"
-                android:padding="@dimen/cam_content_inset_secondary"
-                android:scaleType="fitXY"
-                android:src="@drawable/cam_action_stillshot"
-                tools:ignore="ContentDescription"
-                />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"/>
 
 
-        </RelativeLayout>
-
-    </RelativeLayout>
 
     <ImageView
         android:id="@+id/rectangle"
@@ -102,5 +69,48 @@
         android:alpha="0.7"
         android:textColor="@color/colorGreyDark"
         android:textSize="120sp" />
+
+
+    <ImageView
+        android:id="@+id/iv_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <!-- Capture Stillshot Button -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/cam_widget_margin_bottom"
+        android:padding="@dimen/cam_content_inset_primary"
+        android:background="@drawable/circle_opaque"
+        android:id="@+id/capture_button_container">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:background="@drawable/circle_white"
+            android:layout_centerInParent="true"
+            android:id="@+id/capture_button_secondary_container">
+
+            <ImageButton
+                android:id="@+id/take_picture"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/cam_circle_selector"
+                android:padding="@dimen/cam_content_inset_secondary"
+                android:scaleType="fitXY"
+                android:src="@drawable/cam_action_stillshot"
+                tools:ignore="ContentDescription"
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

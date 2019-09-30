@@ -1,5 +1,6 @@
 package com.example.camerabioexample_android.camerabiomanager.camera;
 
+import android.hardware.Camera;
 import android.hardware.camera2.CameraCharacteristics;
 import android.util.Log;
 import android.util.Size;
@@ -142,5 +143,88 @@ public class ImageSize {
         return optimalSize;
 
     }
+
+
+    public static Camera.Size getOptimalPreviewSizeBack(List<Camera.Size> sizes, float w, float h, int facing, boolean portrait) {
+
+        float ASPECT_TOLERANCE = 0.1f;
+
+        // valida rotação da tela - portrait ou landscape
+        if (h > w) {
+            float temp = w;
+            w = h;
+            h = temp;
+        }
+
+        float targetRatio = w / h;
+
+        List<Camera.Size> cameraSizes = new ArrayList<>();
+
+        if (facing == CameraCharacteristics.LENS_FACING_BACK) {
+            for (Camera.Size size : sizes) {
+
+                if ((size.width > MAX_JPEG_WIDTH && size.height > MAX_JPEG_HEIGHT) || size.width == size.height) {
+                    continue;
+                }
+
+                float maxWidthItem = size.width;
+                float maxHeightItem = size.height;
+
+                // valida a altura e largura da tela x opções disponiveis
+                if (maxWidthItem <= w && maxHeightItem <= h) {
+                    cameraSizes.add(size);
+                }
+            }
+        }
+
+        if (cameraSizes.isEmpty()) return null;
+
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+
+        float targetHeight = h;
+
+        while (optimalSize == null) {
+
+            for (Camera.Size size : cameraSizes) {
+                double ratio = (double) size.width / size.height;
+
+                if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
+
+                if (Math.abs(size.height - targetHeight) < minDiff) {
+                    optimalSize = size;
+                    minDiff = Math.abs(size.height - targetHeight);
+                }
+            }
+            ASPECT_TOLERANCE += 0.1f;
+        }
+
+
+//        if (optimalSize == null) {
+//            minDiff = Double.MAX_VALUE;
+//
+//            for (Camera.Size size : cameraSizes) {
+//                if (Math.abs(size.height - targetHeight) < minDiff) {
+//                    optimalSize = size;
+//                    minDiff = Math.abs(size.height - targetHeight);
+//                }
+//            }
+//        }
+
+        if(optimalSize.height > 1024) {
+
+            // Size size = new Size((optimalSize.width / 2) , (optimalSize.height / 2));
+
+            Camera cam = Camera.open();
+            Camera.Size size = cam.new Size((optimalSize.width / 2) , (optimalSize.height / 2));
+            optimalSize = size;
+
+        }
+
+
+
+        return optimalSize;
+    }
+
 
 }

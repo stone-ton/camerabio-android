@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 
 import com.example.camerabioexample_android.R;
+import com.example.camerabioexample_android.camerabiomanager.bitmap.ImageUtils;
 import com.example.camerabioexample_android.camerabiomanager.camera.CaptureImageProcessor;
 import com.example.camerabioexample_android.camerabiomanager.camera.ImageProcessor;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -235,7 +236,9 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
                     .build();
         }
 
+
         visionImage[0] = FirebaseVisionImage.fromByteArray(image, metadata);
+
 
         firebaseVisionFaceDetector
                 .detectInImage(visionImage[0])
@@ -575,7 +578,7 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
     public void capture(String base64) {
 
         if (base64 != null) {
-            this.cameraBioManager.capture(base64);
+            this.cameraBioManager.captureDocument(base64);
             this.finish();
         } else {
             showErrorMessage("Erro ao recuperar imagem capturada");

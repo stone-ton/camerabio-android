@@ -15,7 +15,13 @@ public class CameraBioManager {
 
     CallbackCameraBio cbc;
     Activity context;
+
     protected SelfieActivity sAc;
+    protected DocumentActivity dAc;
+
+    public static final int RG_FRENTE = 501;
+    public static final int RG_VERSO = 502;
+    public static final int CNH = 4;
 
     public CameraBioManager(CallbackCameraBio callbackBioCamera) {
 
@@ -43,10 +49,29 @@ public class CameraBioManager {
 
     }
 
+    public void startCameraDocument(int DOCUMENT_TYPE) {
+
+        dAc = new DocumentActivity();
+        dAc.setCameraBioManager(this);
+        Intent intent = new Intent(context, dAc.getClass());
+        intent.putExtra("DOCUMENT_TYPE", DOCUMENT_TYPE);
+        context.startActivity(intent);
+
+    }
+
+
     public void capture(String base64) {
 
         cbc.onSuccessCapture(base64);
         sAc.finish();
+
+
+    }
+
+    public void captureDocument(String base64) {
+
+        cbc.onSuccessCapture(base64);
+        dAc.finish();
 
 
     }

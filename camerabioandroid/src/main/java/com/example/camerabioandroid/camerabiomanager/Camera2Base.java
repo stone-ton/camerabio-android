@@ -397,7 +397,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 // We don't use a front facing camera in this sample.
                 facing = characteristics.get(CameraCharacteristics.LENS_FACING);
 
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
                     continue;
                 }
 
@@ -477,6 +477,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
 //            previewSize = new Size(1280, 720);
 //        }
 
+        previewSize = new Size(1280, 720);
 
     }
 
