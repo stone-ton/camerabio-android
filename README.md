@@ -36,7 +36,7 @@ Se faz necessário para uma melhor performance e funcionamento do frame de captu
 - Em seguida, abra o arquivo build.gradle (Modulo) e adicione nossa dependência ao seu projeto: 
 
 ```
-implementation 'com.github.MatheusDomingos:camerabio-android:0.0.1'
+ implementation 'com.github.acesso-io:camerabio-android:1.0.0'
 ```
 
 Pronto! O seu projeto já está pronto para o uso de nossa ferramenta.
@@ -89,9 +89,21 @@ Voce pode também iniciar a camera voltada para capturas de Documentos, é bem s
 ```
 
   CameraBioManager cb = new CameraBioManager(MainActivity.this);
-  cb.startCameraDocument();
+  cb.startCameraDocument(cb.RG_FRENTE);
 
 ```
+
+Note que acima estamos inicalizando a abertura de câmera especificando o tipo de documento para máscara. 
+Atualmente temos 3 tipos de documentos: 
+
+ - cb.RG_FRENTE,
+ - cb.RG_VERSO,
+ - cb.CNH
+
+Caso deseje apenas abrir a camera para capturar documento sem nenhuma mascara acima, escolha a opcao:
+
+ - cb.NONE
+ 
 
 E o retorno: 
 
