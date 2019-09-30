@@ -22,6 +22,7 @@ public class CameraBioManager {
     public static final int RG_FRENTE = 501;
     public static final int RG_VERSO = 502;
     public static final int CNH = 4;
+    public static final int NONE = 99;
 
     public CameraBioManager(CallbackCameraBio callbackBioCamera) {
 
@@ -38,7 +39,6 @@ public class CameraBioManager {
         }
 
     }
-
 
     public void startCamera(){
 
@@ -59,7 +59,6 @@ public class CameraBioManager {
 
     }
 
-
     public void capture(String base64) {
 
         cbc.onSuccessCapture(base64);
@@ -75,6 +74,5 @@ public class CameraBioManager {
 
 
     }
-
 
 }
