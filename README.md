@@ -36,7 +36,7 @@ Se faz necessário para uma melhor performance e funcionamento do frame de captu
 - Em seguida, abra o arquivo build.gradle (Modulo) e adicione nossa dependência ao seu projeto: 
 
 ```
- implementation 'com.github.acesso-io:camerabio-android:1.0.0'
+ implementation 'com.github.acesso-io:camerabio-android:1.0.1'
 ```
 
 Pronto! O seu projeto já está pronto para o uso de nossa ferramenta.
