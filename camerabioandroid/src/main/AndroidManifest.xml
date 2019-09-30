@@ -25,6 +25,12 @@
         android:noHistory="true"
         android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".camerabiomanager.DocumentActivity"
+            android:screenOrientation="portrait"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 </application>
 
 
