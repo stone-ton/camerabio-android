@@ -403,21 +403,19 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 facing = characteristics.get(CameraCharacteristics.LENS_FACING);
 
 
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
-                    continue;
-                }
+                if(isFront) {
 
-             /*   if(isFront) {
                     if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
                         continue;
                     }
+
                 }else{
+
                     if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
                         continue;
                     }
-                }
 
-              */
+                }
 
 
                 // obtem as caracteristicas da camera
