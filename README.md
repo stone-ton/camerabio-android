@@ -33,10 +33,10 @@ android.enableJetifier=true
 ````
 Se faz necessário para uma melhor performance e funcionamento do frame de captura
 
-- Em seguida, abra o arquivo build.gradle (Modulo) e adicione nossa dependência ao seu projeto: 
+- Em seguida, abra o arquivo build.gradle (Modulo) e implemente nossa dependência ao seu projeto: 
 
 ```
- implementation 'com.github.acesso-io:camerabio-android:1.0.2'
+ implementation 'com.github.acesso-io:camerabio-android:1.0.3'
 ```
 
 Pronto! O seu projeto já está pronto para o uso de nossa ferramenta.
