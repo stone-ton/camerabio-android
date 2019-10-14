@@ -16,7 +16,7 @@ Estas instruções farão com que você consiga implementar a câmera com engenh
 
 - Abra o arquivo build.gradle (Projeto) e adicione Jitpack manager em repositorios, seu código deve parecer com isto: 
 
-```
+```java
 allprojects {
     repositories {
         google()
@@ -33,10 +33,10 @@ android.enableJetifier=true
 ````
 Se faz necessário para uma melhor performance e funcionamento do frame de captura
 
-- Em seguida, abra o arquivo build.gradle (Modulo) e adicione nossa dependência ao seu projeto: 
+- Em seguida, abra o arquivo build.gradle (Modulo) e implemente nossa dependência ao seu projeto: 
 
 ```
- implementation 'com.github.acesso-io:camerabio-android:1.0.2'
+ implementation 'com.github.acesso-io:camerabio-android:1.0.3'
 ```
 
 Pronto! O seu projeto já está pronto para o uso de nossa ferramenta.
@@ -47,7 +47,7 @@ Importar, inicializar e receber os callbacks básicos é muito simples, siga os 
 
 - Abra a sua Activity ou Fragment que deseja manusear nossa sdk e adicione as seguintes linhas: 
 
-```
+```java
 import com.example.camerabio.CallbackBio;
 import com.example.camerabio.RestBio;
 
@@ -64,7 +64,7 @@ Pronto, importamos e inicializamos nossa solução... Estamos quase lá!
 
 Note que implementamos o CallbackCameraBio, responsável pelos retornos de nossa sdk. Ele irá indicar que implemente os seguintes métodos: 
 
-```
+```java
  @Override
  public void onSuccessCapture(String base64) {
   // Aqui está o base64 da captura    
@@ -86,7 +86,7 @@ Simples, não? xD
 
 Voce pode também iniciar a camera voltada para capturas de Documentos, é bem simples: 
 
-```
+```java
 
   CameraBioManager cb = new CameraBioManager(MainActivity.this);
   cb.startCameraDocument(cb.RG_FRENTE);
@@ -107,7 +107,7 @@ Caso deseje apenas abrir a camera para capturar documento sem nenhuma mascara ac
 
 E o retorno: 
 
-```
+```java
  @Override
  public void onSuccessCaptureDocument(String base64) {
   // Aqui está o base64 da captura    
