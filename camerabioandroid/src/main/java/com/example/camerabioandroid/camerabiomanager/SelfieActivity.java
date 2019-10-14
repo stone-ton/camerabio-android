@@ -141,6 +141,8 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
 
         super.onCreate(savedInstanceState);
 
+        isFront = true;
+
         Bundle b = getIntent().getExtras();
 //        cameraBioManager = (CameraBioManager) b.getParcelable("CLASS");
 //

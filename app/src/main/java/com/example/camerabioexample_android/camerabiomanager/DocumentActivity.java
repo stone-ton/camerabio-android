@@ -115,6 +115,8 @@ public class DocumentActivity extends Camera2Base implements ImageProcessor, Cap
 
         super.onCreate(savedInstanceState);
 
+        isFront = false;
+
         Bundle b = getIntent().getExtras();
         this.DOCUMENT_TYPE = b.getInt("DOCUMENT_TYPE");
 
