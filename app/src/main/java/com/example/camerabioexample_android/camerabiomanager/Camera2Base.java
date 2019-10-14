@@ -126,7 +126,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
     private final Object dimensionLock = new Object();
     private SurfaceTexture previewSurfaceTexture;
 
-    protected Boolean isFront;
+    public Boolean isFront = false;
 
     protected final TextureView.SurfaceTextureListener surfaceTextureListener = new TextureView.SurfaceTextureListener() {
 
@@ -402,7 +402,12 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 // We don't use a front facing camera in this sample.
                 facing = characteristics.get(CameraCharacteristics.LENS_FACING);
 
-                if(isFront) {
+
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                    continue;
+                }
+
+             /*   if(isFront) {
                     if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
                         continue;
                     }
@@ -411,6 +416,8 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                         continue;
                     }
                 }
+
+              */
 
 
                 // obtem as caracteristicas da camera
