@@ -10,7 +10,9 @@ Estas instruções farão com que você consiga implementar a câmera com engenh
 
 - Android Studio - IDE oficial de desenvolvimento Google. Versão 9 ou superior
 - Maven Jitpack - Gerenciador de bibiotecas para a IDE.
-- Precisamos também do arquivo googleservices.json referente ao seu projeto. Crie e adicione na pasta app do seu diretório. Precisa de ajuda? Segue o link: [Google Console](https://console.firebase.google.com)   
+
+#### Crie o seu projeto no Firebase
+- A nossa SDK conta com soluções provenientes do MLKit da Google, se fazendo necessário criar adequadamento o projeto no [Firebase  Console](https://console.firebase.google.com) seguindo todas as instruções para gerar o arquivo googleservices.json ao seu projeto no Android Studio.  
 
 ### Instalando
 
@@ -26,12 +28,20 @@ allprojects {
 }
 ```
 
-- Adicione suporte ao AndroidX ao seu arquivo build.properties:
+- Adicione suporte ao AndroidX ao seu arquivo build.properties, se faz necessário para uma melhor performance e funcionamento do frame de captura:
 ```
 android.useAndroidX=true
 android.enableJetifier=true
 ````
-Se faz necessário para uma melhor performance e funcionamento do frame de captura
+
+*Em caso de _ERRO_ ao compilar por incompatibilidade da versão do frame min-26, adicione estas linhas em app/build.gradle*
+
+```
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+```
 
 - Em seguida, abra o arquivo build.gradle (Modulo) e implemente nossa dependência ao seu projeto: 
 
@@ -53,8 +63,14 @@ import com.example.camerabio.RestBio;
 
 public class MainActivity extends AppCompatActivity implements CallbackCameraBio {
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
        CameraBioManager cb = new CameraBioManager(MainActivity.this);
        cb.startCamera();
+       
+    }
 
 }
 ```
@@ -112,6 +128,12 @@ E o retorno:
  public void onSuccessCaptureDocument(String base64) {
   // Aqui está o base64 da captura    
  }
+
+
+@Override
+public void onSuccessCaptureDocument(String base64) {
+
+}
 
 @Override
 public void onFailedCaptureDocument(String description) {
