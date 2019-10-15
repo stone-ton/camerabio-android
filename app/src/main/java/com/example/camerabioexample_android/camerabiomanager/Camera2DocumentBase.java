@@ -1,4 +1,4 @@
-package com.example.camerabioandroid.camerabiomanager;
+package com.example.camerabioexample_android.camerabiomanager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,13 +38,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.example.camerabioandroid.R;
-import com.example.camerabioandroid.camerabiomanager.bitmap.ImageUtils;
-import com.example.camerabioandroid.camerabiomanager.camera.AutoFitTextureView;
-import com.example.camerabioandroid.camerabiomanager.camera.CaptureImageProcessor;
-import com.example.camerabioandroid.camerabiomanager.camera.ImageProcessor;
-import com.example.camerabioandroid.camerabiomanager.camera.ImageSize;
-import com.example.camerabioandroid.camerabiomanager.exif.Exif;
+
+import com.example.camerabioexample_android.R;
+import com.example.camerabioexample_android.camerabiomanager.bitmap.ImageUtils;
+import com.example.camerabioexample_android.camerabiomanager.camera.AutoFitTextureView;
+import com.example.camerabioexample_android.camerabiomanager.camera.CaptureImageProcessor;
+import com.example.camerabioexample_android.camerabiomanager.camera.ImageProcessor;
+import com.example.camerabioexample_android.camerabiomanager.camera.ImageSize;
+import com.example.camerabioexample_android.camerabiomanager.exif.Exif;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.io.File;
@@ -58,7 +59,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Camera2Base extends BaseActivity implements View.OnClickListener {
+public class Camera2DocumentBase extends BaseActivity implements View.OnClickListener {
 
     protected Boolean DEBUG = Boolean.FALSE;
     protected static Activity activity;
@@ -127,6 +128,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
     private final Object dimensionLock = new Object();
     private SurfaceTexture previewSurfaceTexture;
 
+
     protected final TextureView.SurfaceTextureListener surfaceTextureListener = new TextureView.SurfaceTextureListener() {
 
         @Override
@@ -170,7 +172,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
         public void onOpened(@NonNull CameraDevice cameraDevice) {
             if (DEBUG) { Log.d(TAG, "Camera opened"); }
             cameraOpenCloseLock.release();
-            Camera2Base.this.cameraDevice = cameraDevice;
+            Camera2DocumentBase.this.cameraDevice = cameraDevice;
             createCameraPreviewSession();
         }
 
@@ -179,7 +181,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
             if (DEBUG) { Log.d(TAG, "Camera disconnected"); }
             cameraOpenCloseLock.release();
             cameraDevice.close();
-            Camera2Base.this.cameraDevice = null;
+            Camera2DocumentBase.this.cameraDevice = null;
         }
 
         @Override
@@ -187,7 +189,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
             if (DEBUG) { Log.d(TAG, "Camera error"); }
             cameraOpenCloseLock.release();
             cameraDevice.close();
-            Camera2Base.this.cameraDevice = null;
+            Camera2DocumentBase.this.cameraDevice = null;
             finish();
         }
 
@@ -398,12 +400,9 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 facing = characteristics.get(CameraCharacteristics.LENS_FACING);
 
 
-
-                    if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                    if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
                         continue;
                     }
-
-
 
 
                 // obtem as caracteristicas da camera
@@ -767,7 +766,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
     }
 
     /**
-     * Configures the necessary {@link android.graphics.Matrix} transformation to `textureView`.
+     * Configures the necessary {@link Matrix} transformation to `textureView`.
      * This method should be called after the camera preview size is determined in
      * setUpCameraOutputs and also the size of `textureView` is fixed.
      *

@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class DocumentActivity extends Camera2Base implements ImageProcessor, CaptureImageProcessor {
+public class DocumentActivity extends Camera2DocumentBase implements ImageProcessor, CaptureImageProcessor {
 
     public static final float COMPENSATION_EYE = 0.05f;
     public static int total = 0;
@@ -115,7 +115,6 @@ public class DocumentActivity extends Camera2Base implements ImageProcessor, Cap
 
         super.onCreate(savedInstanceState);
 
-        isFront = false;
 
         Bundle b = getIntent().getExtras();
         this.DOCUMENT_TYPE = b.getInt("DOCUMENT_TYPE");

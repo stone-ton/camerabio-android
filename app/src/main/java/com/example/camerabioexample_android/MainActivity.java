@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements CallbackCameraBio
             @Override
             public void onClick(View v) {
                 CameraBioManager cb = new CameraBioManager(MainActivity.this);
-                cb.startCamera();
+                cb.startCameraDocument(cb.NONE);
             }
         });
 
