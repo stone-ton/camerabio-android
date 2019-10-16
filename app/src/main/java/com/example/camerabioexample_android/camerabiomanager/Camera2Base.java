@@ -481,9 +481,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
 //            previewSize = new Size(1280, 720);
 //        }
 
-
         previewSize = new Size(1280, 720);
-
 
     }
 
