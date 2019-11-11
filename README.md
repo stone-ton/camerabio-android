@@ -47,7 +47,7 @@ compileOptions {
 - Em seguida, abra o arquivo build.gradle (Modulo) e implemente nossa dependência ao seu projeto: 
 
 ```
- implementation 'com.github.acesso-io:camerabio-android:1.0.3'
+ implementation 'com.github.acesso-io:camerabio-android:2.0.7'
 ```
 
 Pronto! O seu projeto já está pronto para o uso de nossa ferramenta.
@@ -146,7 +146,7 @@ public void onFailedCaptureDocument(String description) {
 ## Construido com
 
 * [Retrofit](https://square.github.io/retrofit/) - Framework para suporte REST
-
+* [ML KIt Google](https://firebase.google.com/docs/ml-kit/detect-faces)  - Framework de IA para o reconhecimento facial
 
 ## Versionamento
 
