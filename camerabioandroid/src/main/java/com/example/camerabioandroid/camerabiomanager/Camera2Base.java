@@ -228,7 +228,7 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                 }
                 else {
                     ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-                    byte[] bytes = new byte[buffer.remaining()];
+                    final byte[] bytes = new byte[buffer.remaining()];
                     buffer.get(bytes);
 
                     if (DEBUG && CURR_IMAGE_COUNT % 20 == 0) {
@@ -236,9 +236,9 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                         saveReceivedImage(jpegData, jpegData.length, String.valueOf(CURR_IMAGE_COUNT));
                     }
 
-                    int w = image.getWidth();
-                    int h = image.getHeight();
-                    int f = image.getFormat();
+                    final int w = image.getWidth();
+                    final int h = image.getHeight();
+                    final int f = image.getFormat();
                     image.close();
                     buffer = null;
 
@@ -467,11 +467,11 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
 
 
         // proporção ideal para tela
-        previewSize = ImageSize.getOptimalPreviewSize(
+      /*  previewSize = ImageSize.getOptimalPreviewSize(
                 map.getOutputSizes(SurfaceTexture.class),
                 width,
                 height,
-                facing);
+                facing); */
 
 //        if(previewSize.getWidth() == 1440 && previewSize.getHeight() == 720) {
 //            previewSize = new Size(1280, 720);
