@@ -47,7 +47,7 @@ compileOptions {
 - Em seguida, abra o arquivo build.gradle (Modulo) e implemente nossa dependência ao seu projeto: 
 
 ```
- implementation 'com.github.acesso-io:camerabio-android:2.0.7'
+ implementation 'com.github.acesso-io:camerabio-android:2.0.8'
 ```
 
 Pronto! O seu projeto já está pronto para o uso de nossa ferramenta.
