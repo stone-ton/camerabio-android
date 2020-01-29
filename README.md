@@ -142,6 +142,9 @@ public void onFailedCaptureDocument(String description) {
 }
 ```
 
+## Tamanho 
+
+A SDK em si possui 88.3KB, porém, faz uso de ferramentas do Firebase a qual não temos controle do tamanho - depende da versão - e pode ser verificado junto ao site oficial da mesma. 
 
 ## Construido com
 
