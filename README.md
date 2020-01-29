@@ -148,7 +148,6 @@ A SDK em si possui 88.3KB, porém, faz uso de ferramentas do Firebase a qual nã
 
 ## Construido com
 
-* [Retrofit](https://square.github.io/retrofit/) - Framework para suporte REST
 * [ML KIt Google](https://firebase.google.com/docs/ml-kit/detect-faces)  - Framework de IA para o reconhecimento facial
 
 ## Versionamento
