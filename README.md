@@ -9,7 +9,7 @@ Estas instruções farão com que você consiga implementar a câmera com engenh
 ### Pré requisitos
 
 - Android Studio - IDE oficial de desenvolvimento Google. Versão 9 ou superior
-- minSdkVersion 19
+- minSdkVersion 21
 - Maven Jitpack - Gerenciador de bibiotecas para a IDE.
 
 #### Crie o seu projeto no Firebase
