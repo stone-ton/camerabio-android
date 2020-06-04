@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.text.style.IconMarginSpan;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -62,9 +63,11 @@ public class CameraBioManager {
     public void stopCamera() {
         if (dAc != null) {
             dAc.closeCamera();
+            dAc.finish();
         }
         if (sAc != null) {
             sAc.closeCamera();
+            sAc.finish();
         }
     }
 }
