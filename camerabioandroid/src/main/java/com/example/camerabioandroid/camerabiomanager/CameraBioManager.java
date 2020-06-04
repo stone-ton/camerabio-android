@@ -34,41 +34,40 @@ public class CameraBioManager {
             }, REQUEST_CAMERA_PERMISSION);
             return;
         }
-
     }
 
     public void startCamera(){
-
         sAc = new SelfieActivity();
         sAc.setCameraBioManager(this);
         Intent intent = new Intent(context, sAc.getClass());
         context.startActivity(intent);
-
     }
 
     public void startCameraDocument(int DOCUMENT_TYPE) {
-
         dAc = new DocumentActivity();
         dAc.setCameraBioManager(this);
         Intent intent = new Intent(context, dAc.getClass());
         intent.putExtra("DOCUMENT_TYPE", DOCUMENT_TYPE);
         context.startActivity(intent);
-
     }
 
     public void capture(String base64) {
-
         cbc.onSuccessCapture(base64);
         sAc.finish();
-
-
     }
 
     public void captureDocument(String base64) {
-
         cbc.onSuccessCaptureDocument(base64);
         dAc.finish();
-
     }
 
+    public void stopCamera() {
+        if (dAc != null) {
+            dAc.finish();
+            dAc.closeCamera();
+        }
+        if (sAc != null) {
+            sAc.closeCamera();
+        }
+    }
 }
