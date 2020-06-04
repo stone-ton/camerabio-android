@@ -9,9 +9,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 public class CameraBioManager {
-
     protected static final int REQUEST_CAMERA_PERMISSION = 1;
-
 
     CallbackCameraBio cbc;
     Activity context;
@@ -24,10 +22,9 @@ public class CameraBioManager {
     public static final int CNH = 4;
     public static final int NONE = 99;
 
-    public CameraBioManager(CallbackCameraBio callbackBioCamera) {
-
+    public CameraBioManager(CallbackCameraBio callbackBioCamera, Activity context) {
         this.cbc = callbackBioCamera;
-        context = (Activity) this.cbc;
+        this.context = context;
 
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
