@@ -64,10 +64,9 @@ public class CameraBioManager {
     public void stopCamera() {
         if (dAc != null) {
             dAc.finish();
-            dAc.closeCamera();
         }
         if (sAc != null) {
-            sAc.closeCamera();
+            sAc.finish();
         }
     }
 }
