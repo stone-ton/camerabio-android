@@ -53,12 +53,10 @@ public class CameraBioManager {
 
     public void capture(String base64) {
         cbc.onSuccessCapture(base64);
-        sAc.finish();
     }
 
     public void captureDocument(String base64) {
         cbc.onSuccessCaptureDocument(base64);
-        dAc.finish();
     }
 
     public void stopCamera() {
