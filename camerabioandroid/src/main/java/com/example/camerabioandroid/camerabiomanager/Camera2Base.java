@@ -49,6 +49,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.lang.SecurityException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -606,6 +607,8 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
             Log.d(TAG, e.getMessage());
         } catch (InterruptedException e) {
             throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
+        } catch (SecurityException e) {
+            Log.e("SPRENGEL", "SecurityException on Camera2Base 610", e);
         }
     }
 
@@ -626,6 +629,8 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
 
                 } catch (CameraAccessException e) {
                     Log.d("Erro de acesso a camera: " + TAG, e.toString());
+                } catch (SecurityException e) {
+                    Log.e("SPRENGEL", "SecurityException on Camera2Base 632", e);
                 }
             }
         });

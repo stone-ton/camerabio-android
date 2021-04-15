@@ -275,7 +275,9 @@ public class DocumentActivity extends Camera2DocumentBase implements ImageProces
 
     @Override
     public void onClick(View view) {
+        Log.i("SPRENGEL", "com.example.camerabioandroid.camerabiomanager.DocumentActivity: onClick");
         if (view.getId() == R.id.take_picture) {
+            Log.i("SPRENGEL", "onClick: take_picture");
             isRequestImage = true;
             super.takePicture();
         }

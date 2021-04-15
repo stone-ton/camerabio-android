@@ -60,7 +60,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Camera2DocumentBase extends BaseActivity implements View.OnClickListener {
 
-    protected Boolean DEBUG = Boolean.FALSE;
+    protected Boolean DEBUG = true;
     protected static Activity activity;
     protected static ImageProcessor imageProcessor;
     protected static CaptureImageProcessor captureImageProcessor;
@@ -811,6 +811,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
         if (DEBUG) { Log.d(TAG, "Take picture"); }
 
         if (previewRequestBuilder == null || captureSession == null) {
+            Log.e("SPRENGEL", "previewRequestBuilder == null || captureSession == null");
             return;
         }
 
@@ -828,6 +829,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                     captureCallback,
                     backgroundHandler);
         } catch (CameraAccessException e) {
+            Log.e("SPRENGEL", "CameraAccessException", e);
             e.printStackTrace();
         }
     }

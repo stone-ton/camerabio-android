@@ -271,7 +271,9 @@ public class DocumentActivity extends Camera2DocumentBase implements ImageProces
 
     @Override
     public void onClick(View view) {
+        Log.e("SPRENGEL", "onClick");
         if (view.getId() == R.id.take_picture) {
+            Log.e("SPRENGEL", "R.id.take_picture");
             isRequestImage = true;
             super.takePicture();
         }
