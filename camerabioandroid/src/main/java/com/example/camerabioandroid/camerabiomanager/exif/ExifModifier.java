@@ -11,7 +11,7 @@ import java.util.List;
 
 class ExifModifier {
     public static final String TAG = "ExifModifier";
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     private final ByteBuffer mByteBuffer;
     private final ExifData mTagToModified;
     private final List<TagOffset> mTagOffsets = new ArrayList<TagOffset>();

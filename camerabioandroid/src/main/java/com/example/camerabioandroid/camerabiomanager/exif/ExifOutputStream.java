@@ -43,7 +43,7 @@ import java.util.ArrayList;
  */
 class ExifOutputStream extends FilterOutputStream {
     private static final String TAG = "ExifOutputStream";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private static final int STREAMBUFFER_SIZE = 0x00010000; // 64Kb
     private static final int STATE_SOI = 0;
     private static final int STATE_FRAME_HEADER = 1;

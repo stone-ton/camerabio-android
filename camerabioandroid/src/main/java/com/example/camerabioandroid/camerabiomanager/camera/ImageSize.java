@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ImageSize {
 
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
     private static final String TAG = "ImageSize";
 
     // ideal proportion to biometry
