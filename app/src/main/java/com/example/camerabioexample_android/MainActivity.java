@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.camerabioexample_android.camerabiomanager.CallbackCameraBio;
-import com.example.camerabioexample_android.camerabiomanager.CameraBioManager;
+import com.example.camerabioandroid.camerabiomanager.CallbackCameraBio;
+import com.example.camerabioandroid.camerabiomanager.CameraBioManager;
 
 public class MainActivity extends AppCompatActivity implements CallbackCameraBio {
 
