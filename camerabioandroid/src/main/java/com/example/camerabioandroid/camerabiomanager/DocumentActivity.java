@@ -212,6 +212,8 @@ public class DocumentActivity extends Camera2DocumentBase implements ImageProces
 
         if (!initialized) {
 
+            Log.w("CALAZANS", "documentactivity init");
+
             // tela
             screenWidth = getWidthPixels();
             screenHeight = getHeightPixels();
@@ -283,8 +285,9 @@ public class DocumentActivity extends Camera2DocumentBase implements ImageProces
 
     @Override
     public void capture(String base64) {
-
+        Log.w("CALAZANS", "capture");
         if (base64 != null) {
+            Log.w("CALAZANS", "capture base64 null");
             this.cameraBioManager.captureDocument(base64);
             this.finish();
         } else {

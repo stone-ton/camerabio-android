@@ -169,6 +169,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onOpened(@NonNull CameraDevice cameraDevice) {
+            Log.w("CALAZANS", "camera2documentbase onOpened");
             if (DEBUG) { Log.d(TAG, "Camera opened"); }
             cameraOpenCloseLock.release();
             Camera2DocumentBase.this.cameraDevice = cameraDevice;
@@ -177,6 +178,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onDisconnected(@NonNull CameraDevice cameraDevice) {
+            Log.w("CALAZANS", "camera2documentbase onDisconnected");
             if (DEBUG) { Log.d(TAG, "Camera disconnected"); }
             cameraOpenCloseLock.release();
             cameraDevice.close();
@@ -185,6 +187,8 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onError(@NonNull CameraDevice cameraDevice, int error) {
+            Log.w("CALAZANS", "camera2documentbase onError");
+            Log.w("CALAZANS", String.valueOf(error));
             if (DEBUG) { Log.d(TAG, "Camera error"); }
             cameraOpenCloseLock.release();
             cameraDevice.close();
@@ -198,6 +202,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onImageAvailable(ImageReader reader) {
+            Log.w("CALAZANS", "onImageAvailabler");
             backgroundHandler.post(new ImageSaver(reader.acquireNextImage()));
         }
 
@@ -262,6 +267,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
     };
 
     private static void saveReceivedImage(Bitmap bitmap, String imageName) throws Exception {
+        Log.w("CALAZANS", "saveReceivedImage");
         File path = new File(activity.getExternalFilesDir(null), "frame");
         if(!path.exists()){
             path.mkdirs();
@@ -276,9 +282,11 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
     private static void saveReceivedImage(byte[] imageByteArray, int numberOfBytes, String imageName){
         try {
+            Log.w("CALAZANS", "saveReceivedImage");
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, numberOfBytes);
             saveReceivedImage(bitmap, imageName);
         } catch (Exception e) {
+            Log.w("CALAZANS", "saveReceivedImage catch");
             Log.e(TAG, "Saving received message failed with", e);
         }
     }
@@ -286,6 +294,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
     protected CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
 
         protected void process(CaptureResult result) {
+            Log.w("CALAZANS", "captureCallback process state: " + String.valueOf(state));
 
             switch (state) {
 
@@ -386,6 +395,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
     protected void setupCameraOutputs(int width, int height) {
 
         if (DEBUG) { Log.d(TAG, "Setup camera"); }
+        Log.w("CALAZANS", "setupCameraOutputs");
 
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
 
@@ -440,10 +450,13 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                 return;
             }
         } catch (CameraAccessException ex) {
+            Log.w("CALAZANS", "CameraAccessException");
             Log.d(TAG, ex.toString());
         } catch (NullPointerException ex) {
+            Log.w("CALAZANS", "setupCamera NullPointer");
             showAlert(getString(R.string.camera_error));
         } catch (Exception ex) {
+            Log.w("CALAZANS", "setupCamera EX");
             Log.d(TAG, ex.toString());
         }
     }
@@ -590,6 +603,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
     protected void openCamera(int width, int height) {
 
         if (DEBUG) { Log.d(TAG, "Open camera"); }
+        Log.w("CALAZANS", "openCamera");
 
         setupCameraOutputs(width, height);
         configureTransform(width, height);
@@ -606,8 +620,10 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
             cameraManager.openCamera(cameraId, stateCallback, backgroundHandler);
 
         } catch (CameraAccessException e) {
+            Log.w("CALAZANS", "openCamera CameraAccessException");
             Log.d(TAG, e.getMessage());
         } catch (InterruptedException e) {
+            Log.w("CALAZANS", "openCamera InterruptedException");
             throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
         }
     }
@@ -809,6 +825,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
     protected void takePicture() {
 
         if (DEBUG) { Log.d(TAG, "Take picture"); }
+        Log.w("CALAZANS", "takePicture");
 
         if (previewRequestBuilder == null || captureSession == null) {
             return;
@@ -828,6 +845,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                     captureCallback,
                     backgroundHandler);
         } catch (CameraAccessException e) {
+            Log.w("CALAZANS", "CameraAccessException");
             e.printStackTrace();
         }
     }
@@ -835,6 +853,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
     protected void captureStillPicture() {
 
         if (DEBUG) { Log.d(TAG, "Capture still picture"); }
+        Log.w("CALAZANS", "captureStillPicture");
 
         try {
 
@@ -859,6 +878,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
             captureSession.capture(captureBuilder.build(), null, null);
 
         } catch (CameraAccessException ex) {
+            Log.w("CALAZANS", "CameraAccessException");
             Log.d(TAG, ex.toString());
         }
     }
@@ -888,6 +908,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
         public void run() {
 
             try {
+                Log.w("CALAZANS", "onClick ImageSaver");
                 ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                 byte[] bytes = new byte[buffer.remaining()];
                 buffer.get(bytes);
@@ -920,6 +941,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                 base64 = null;
 
             } catch (Exception ex) {
+                Log.w("CALAZANS", "onClick EX");
                 Log.d(TAG, ex.getMessage());
             } finally {
                 image.close();

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements CallbackCameraBio
             @Override
             public void onClick(View v) {
                 CameraBioManager cb = new CameraBioManager(MainActivity.this);
-                cb.startCamera();
+                cb.startCameraDocument(501);
             }
         });
 
@@ -41,17 +42,18 @@ public class MainActivity extends AppCompatActivity implements CallbackCameraBio
 
     @Override
     public void onSuccessCaptureDocument(String base64) {
-
+        Log.w("CALAZANS", "onSuccessCaptureDocument");
     }
 
     @Override
     public void onSuccessCapture(String base64) {
-            bt.setText("PRONTO");
+        Log.w("CALAZANS", "onSuccessCapture");
+        bt.setText("PRONTO");
     }
 
     @Override
     public void onFailedCapture(String description) {
-
+        Log.w("CALAZANS", "onFailedCapture");
     }
 
 }
