@@ -320,11 +320,13 @@ public class Camera2Base extends BaseActivity implements View.OnClickListener {
                     // CONTROL_AE_STATE can be null on some devices
                     Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
 
-//                    if (aeState == null
-//                            || aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE
-//                            || aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
+                   if (aeState == null
+                           || aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE
+                           || aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED
+                           || aeState == CaptureRequest.CONTROL_AE_STATE_CONVERGED
+                    ) {
                         state = STATE_WAITING_NON_PRECAPTURE;
-//                    }
+                   }
                     break;
                 }
                 case STATE_WAITING_NON_PRECAPTURE: {
