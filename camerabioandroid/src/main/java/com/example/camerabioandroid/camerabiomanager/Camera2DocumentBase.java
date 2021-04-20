@@ -89,7 +89,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
 
-    protected static final String TAG = "Camera2Base";
+    protected static final String LOG_TAG = "Camera2DocumentBase";
 
     protected static final int STATE_PREVIEW = 0;
     protected static final int STATE_WAITING_LOCK = 1;
@@ -137,7 +137,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-            if (DEBUG) { Log.d(TAG, "Surface size change"); }
+            if (DEBUG) { Log.d(LOG_TAG, "Surface size change"); }
             configureTransform(width, height);
             updatePreviewBufferSize();
         }
@@ -149,14 +149,14 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture texture) {
-            if (DEBUG) { Log.d(TAG, "Surface texture update"); }
+            if (DEBUG) { Log.d(LOG_TAG, "Surface texture update"); }
             updatePreviewBufferSize();
         }
 
     };
 
     private void updatePreviewBufferSize() {
-        if (DEBUG) { Log.d(TAG, "Update preview buffer size"); }
+        if (DEBUG) { Log.d(LOG_TAG, "Update preview buffer size"); }
 
         synchronized (surfaceTextureLock) {
             if (previewSurfaceTexture != null) {
@@ -169,7 +169,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onOpened(@NonNull CameraDevice cameraDevice) {
-            if (DEBUG) { Log.d(TAG, "Camera opened"); }
+            if (DEBUG) { Log.d(LOG_TAG, "Camera opened"); }
             cameraOpenCloseLock.release();
             Camera2DocumentBase.this.cameraDevice = cameraDevice;
             createCameraPreviewSession();
@@ -177,7 +177,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onDisconnected(@NonNull CameraDevice cameraDevice) {
-            if (DEBUG) { Log.d(TAG, "Camera disconnected"); }
+            if (DEBUG) { Log.d(LOG_TAG, "Camera disconnected"); }
             cameraOpenCloseLock.release();
             cameraDevice.close();
             Camera2DocumentBase.this.cameraDevice = null;
@@ -185,7 +185,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
         @Override
         public void onError(@NonNull CameraDevice cameraDevice, int error) {
-            if (DEBUG) { Log.d(TAG, "Camera error"); }
+            if (DEBUG) { Log.d(LOG_TAG, "Camera error"); }
             cameraOpenCloseLock.release();
             cameraDevice.close();
             Camera2DocumentBase.this.cameraDevice = null;
@@ -253,7 +253,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                 }
 
             } catch(Exception ex){
-                Log.d(TAG, ex.getMessage());
+                Log.e(LOG_TAG, "onImageFaceAvailableListener.onImageAvailable", ex);
             } finally {
                 imageReaderLock.unlock();
             }
@@ -268,7 +268,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
         }
         File outFile = new File(path, imageName + ".jpeg");
         String absPath = outFile.getAbsolutePath();
-        Log.d(TAG, "Path image: " + absPath);
+        Log.d(LOG_TAG, "Path image: " + absPath);
         FileOutputStream outputStream = new FileOutputStream(outFile);
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
         outputStream.close();
@@ -279,21 +279,21 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, numberOfBytes);
             saveReceivedImage(bitmap, imageName);
         } catch (Exception e) {
-            Log.e(TAG, "Saving received message failed with", e);
+            Log.e(LOG_TAG, "Saving received message failed with", e);
         }
     }
 
     protected CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
 
         protected void process(CaptureResult result) {
-
             switch (state) {
-
                 case STATE_PREVIEW: {
+                    Log.d(LOG_TAG, "captureCallback state: STATE_PREVIEW");
                     // We have nothing to do when the camera preview is working normally.
                     break;
                 }
                 case STATE_WAITING_LOCK: {
+                    Log.d(LOG_TAG, "captureCallback state: STATE_WAITING_LOCK");
                     Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);
 
                     if (afState == null) {
@@ -317,27 +317,34 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                     break;
                 }
                 case STATE_WAITING_PRECAPTURE: {
-
                     // CONTROL_AE_STATE can be null on some devices
                     Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
 
+                    Log.d(LOG_TAG, "captureCallback state: STATE_WAITING_PRECAPTURE aeState:" + String.valueOf(aeState));
                     if (aeState == null
                             || aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE
-                            || aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
+                            || aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED
+                            || aeState == CaptureResult.CONTROL_AE_STATE_CONVERGED
+                            ) {
+                        Log.d(LOG_TAG, "captureCallback changing from STATE_WAITING_PRECAPTURE to STATE_WAITING_NON_PRECAPTURE");
                         state = STATE_WAITING_NON_PRECAPTURE;
                     }
                     break;
                 }
                 case STATE_WAITING_NON_PRECAPTURE: {
-
                     // CONTROL_AE_STATE can be null on some devices
                     Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
 
+                    Log.d(LOG_TAG, "captureCallback state: STATE_WAITING_NON_PRECAPTURE aeState:" + String.valueOf(aeState));
                     if (aeState == null || aeState != CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
+                        Log.d(LOG_TAG, "captureCallback changing from STATE_WAITING_NON_PRECAPTURE to STATE_PICTURE_TAKEN");
                         state = STATE_PICTURE_TAKEN;
                         captureStillPicture();
                     }
                     break;
+                }
+                default: {
+                    Log.d(LOG_TAG, "captureCallback default: state: " + String.valueOf(state));
                 }
             }
         }
@@ -346,6 +353,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
         public void onCaptureProgressed(@NonNull CameraCaptureSession session,
                                         @NonNull CaptureRequest request,
                                         @NonNull CaptureResult partialResult) {
+            Log.d(LOG_TAG, "captureCallback.onCaptureProgressed");
             process(partialResult);
         }
 
@@ -353,6 +361,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
         public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                        @NonNull CaptureRequest request,
                                        @NonNull TotalCaptureResult result) {
+            Log.d(LOG_TAG, "captureCallback.onCaptureCompleted");
             process(result);
         }
 
@@ -360,7 +369,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onResume() {
-        if (DEBUG) Log.d(TAG, "OnResume");
+        if (DEBUG) Log.d(LOG_TAG, "OnResume");
         super.onResume();
         startBackgroundThread();
 
@@ -377,7 +386,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onPause() {
-        if (DEBUG) Log.d(TAG, "OnPause");
+        if (DEBUG) Log.d(LOG_TAG, "OnPause");
         closeCamera();
         stopBackgroundThread();
         super.onPause();
@@ -385,7 +394,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
     protected void setupCameraOutputs(int width, int height) {
 
-        if (DEBUG) { Log.d(TAG, "Setup camera"); }
+        if (DEBUG) { Log.d(LOG_TAG, "Setup camera"); }
 
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
 
@@ -412,23 +421,23 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                 }
 
                 if (DEBUG) {
-                    Log.d(TAG, "screen width: " + width);
-                    Log.d(TAG, "screen height: " + height);
+                    Log.d(LOG_TAG, "screen width: " + width);
+                    Log.d(LOG_TAG, "screen height: " + height);
                 }
 
                 loadImageSizes(map, width, height);
 
                 if (DEBUG) {
-                    Log.d(TAG, "jpeg width: " + jpegSize.getWidth());
-                    Log.d(TAG, "jpeg height: " + jpegSize.getHeight());
+                    Log.d(LOG_TAG, "jpeg width: " + jpegSize.getWidth());
+                    Log.d(LOG_TAG, "jpeg height: " + jpegSize.getHeight());
                 }
 
                 // buffer de captura
                 createImageReader();
 
                 if (DEBUG) {
-                    Log.d(TAG, "preview width: " + previewSize.getWidth());
-                    Log.d(TAG, "preview height: " + previewSize.getHeight());
+                    Log.d(LOG_TAG, "preview width: " + previewSize.getWidth());
+                    Log.d(LOG_TAG, "preview height: " + previewSize.getHeight());
                 }
 
                 loadOrientations(characteristics);
@@ -439,12 +448,10 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
                 return;
             }
-        } catch (CameraAccessException ex) {
-            Log.d(TAG, ex.toString());
         } catch (NullPointerException ex) {
             showAlert(getString(R.string.camera_error));
         } catch (Exception ex) {
-            Log.d(TAG, ex.toString());
+            Log.e(LOG_TAG, "setupCameraOutputs", ex);
         }
     }
 
@@ -542,7 +549,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                             ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
                     break;
                 default:
-                    Log.e(TAG, "Unknown screen orientation. Defaulting to " +
+                    Log.e(LOG_TAG, "Unknown screen orientation. Defaulting to " +
                             "portrait.");
                     orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
                     break;
@@ -567,7 +574,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                             ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
                     break;
                 default:
-                    Log.e(TAG, "Unknown screen orientation. Defaulting to " +
+                    Log.e(LOG_TAG, "Unknown screen orientation. Defaulting to " +
                             "landscape.");
                     orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
                     break;
@@ -589,7 +596,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
     protected void openCamera(int width, int height) {
 
-        if (DEBUG) { Log.d(TAG, "Open camera"); }
+        if (DEBUG) { Log.d(LOG_TAG, "Open camera"); }
 
         setupCameraOutputs(width, height);
         configureTransform(width, height);
@@ -601,12 +608,12 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                 throw new RuntimeException("Time out waiting to lock camera opening.");
             }
 
-            if (DEBUG) { Log.d(TAG, "Manager Open camera"); }
+            if (DEBUG) { Log.d(LOG_TAG, "Manager Open camera"); }
 
             cameraManager.openCamera(cameraId, stateCallback, backgroundHandler);
 
         } catch (CameraAccessException e) {
-            Log.d(TAG, e.getMessage());
+            Log.e(LOG_TAG, "openCamera:", e);
         } catch (InterruptedException e) {
             throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
         }
@@ -614,7 +621,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
 
     protected void reopenCamera() {
 
-        if (DEBUG) Log.d(TAG, "Reopen camera");
+        if (DEBUG) Log.d(LOG_TAG, "Reopen camera");
 
         AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
             @Override
@@ -628,14 +635,14 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                     cameraManager.openCamera(cameraId, stateCallback, backgroundHandler);
 
                 } catch (CameraAccessException e) {
-                    Log.d("Erro de acesso a camera: " + TAG, e.toString());
+                    Log.e(LOG_TAG, "Erro de acesso a camera", e);
                 }
             }
         });
     }
 
     protected void closeCamera() {
-        if (DEBUG) { Log.d(TAG, "Close camera"); }
+        if (DEBUG) { Log.d(LOG_TAG, "Close camera"); }
 
         try {
             cameraOpenCloseLock.acquire();
@@ -682,12 +689,12 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
             backgroundHandler = null;
             backgroundHandlerFace = null;
         } catch (InterruptedException ex) {
-            Log.d(TAG, ex.getMessage());
+            Log.e(LOG_TAG, "stopBackgroundThread failed", ex);
         }
     }
 
     protected void createCameraPreviewSession() {
-        if (DEBUG) { Log.d(TAG, "Create preview session"); }
+        if (DEBUG) { Log.d(LOG_TAG, "Create preview session"); }
 
         try {
 
@@ -703,8 +710,8 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
             assert previewSurfaceTexture != null;
 
             if (DEBUG) {
-                Log.d(TAG, "preview width: " + previewSize.getWidth());
-                Log.d(TAG, "preview height: " + previewSize.getHeight());
+                Log.d(LOG_TAG, "preview width: " + previewSize.getWidth());
+                Log.d(LOG_TAG, "preview height: " + previewSize.getHeight());
             }
 
             updatePreviewBufferSize();
@@ -747,7 +754,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                                         backgroundHandler);
 
                             } catch (CameraAccessException e) {
-                                Log.d(TAG, e.getMessage());
+                                Log.e(LOG_TAG, "createCaptureSession.onConfigured", e);
                             }
                         }
 
@@ -760,7 +767,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
             );
 
         } catch (CameraAccessException ex) {
-            Log.d(TAG, ex.getMessage());
+            Log.e(LOG_TAG, "createCameraPreviewSession", ex);
         }
     }
 
@@ -774,7 +781,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
      */
     protected void configureTransform(int viewWidth, int viewHeight) {
 
-        if (DEBUG) { Log.d(TAG, "Configure transform"); }
+        if (DEBUG) { Log.d(LOG_TAG, "Configure transform"); }
 
         synchronized (dimensionLock) {
             if (null == textureView || null == previewSize || null == activity) {
@@ -807,10 +814,10 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
     }
 
     protected void takePicture() {
-
-        if (DEBUG) { Log.d(TAG, "Take picture"); }
+        Log.d(LOG_TAG, "Camera2DocumentBase: takePicture()");
 
         if (previewRequestBuilder == null || captureSession == null) {
+            Log.e(LOG_TAG, "Camera2DocumentBase.takePicture(): previewRequestBuilder == null || captureSession == null");
             return;
         }
 
@@ -828,17 +835,17 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                     captureCallback,
                     backgroundHandler);
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            Log.e(LOG_TAG, "Camera2DocumentBase.takePicture(): CameraAccessException e", e);
         }
     }
 
     protected void captureStillPicture() {
-
-        if (DEBUG) { Log.d(TAG, "Capture still picture"); }
+        Log.d(LOG_TAG, "Camera2DocumentBase.captureStillPicture()");
 
         try {
 
             if (null == activity || null == cameraDevice) {
+            Log.e(LOG_TAG, "Camera2DocumentBase.captureStillPicture(): null == activity || null == cameraDevice");
                 return;
             }
 
@@ -859,7 +866,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
             captureSession.capture(captureBuilder.build(), null, null);
 
         } catch (CameraAccessException ex) {
-            Log.d(TAG, ex.toString());
+            Log.e(LOG_TAG, "captureStillPicture", ex);
         }
     }
 
@@ -920,7 +927,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                 base64 = null;
 
             } catch (Exception ex) {
-                Log.d(TAG, ex.getMessage());
+                Log.e(LOG_TAG, "ImageSaver.run", ex);
             } finally {
                 image.close();
             }
@@ -993,7 +1000,7 @@ public class Camera2DocumentBase extends BaseActivity implements View.OnClickLis
                 break;
             default:
                 result = FirebaseVisionImageMetadata.ROTATION_0;
-                Log.e(TAG, "Bad rotation value: " + rotationCompensation);
+                Log.e(LOG_TAG, "Bad rotation value: " + rotationCompensation);
         }
         return result;
     }
