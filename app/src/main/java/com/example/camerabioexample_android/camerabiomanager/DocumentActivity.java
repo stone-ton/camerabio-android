@@ -152,6 +152,12 @@ public class DocumentActivity extends Camera2DocumentBase implements ImageProces
         }else if(DOCUMENT_TYPE == 502) {
             ivMask.setImageResource(R.drawable.frame_rg_verso);
             ivMask.setVisibility(View.VISIBLE);
+        }else if(DOCUMENT_TYPE == 503) {
+            ivMask.setImageResource(R.drawable.frame_cnh_frente);
+            ivMask.setVisibility(View.VISIBLE);
+        }else if(DOCUMENT_TYPE == 504) {
+            ivMask.setImageResource(R.drawable.frame_cnh_verso);
+            ivMask.setVisibility(View.VISIBLE);
         }else if(DOCUMENT_TYPE == 4) {
             ivMask.setImageResource(R.drawable.frame_cnh);
             ivMask.setVisibility(View.VISIBLE);

@@ -21,6 +21,8 @@ public class CameraBioManager {
     public static final int RG_FRENTE = 501;
     public static final int RG_VERSO = 502;
     public static final int CNH = 4;
+    public static final int CNH_FRENTE = 503;
+    public static final int CNH_VERSO = 504;
     public static final int NONE = 99;
 
     public CameraBioManager(CallbackCameraBio callbackBioCamera, Activity context) {
