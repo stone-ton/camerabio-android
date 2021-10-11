@@ -72,6 +72,8 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
     private ImageButton takePictureImageButton;
     private Toast toast;
 
+    private ImageView ivMask;
+
     private float posVerticalLineLeft = 0.0f;
     private float posVerticalLineRight = 0.0f;
     private float posHorizontalLineBottom = 0.0f;
@@ -176,6 +178,10 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
         rootView = findViewById(R.id.root_view);
         autoCapture = true;
         countRegressive = true;
+
+        ivMask  = findViewById(R.id.iv_mask);
+        ivMask.setImageResource(R.drawable.frame_selfie);
+        ivMask.setVisibility(View.VISIBLE);
 
         setMaxSizes();
 
