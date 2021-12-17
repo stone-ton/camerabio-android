@@ -59,6 +59,7 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
             "Gire um pouco a direita",
             "Rosto não identificado",
             "Rosto inclinado"} ;
+    private final String manualCaptureMessage = "Pressione o botão para tirar a foto";
 
     private int erroIndex = -1;
     private boolean faceOK = true;
@@ -137,6 +138,9 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
     private Boolean autoCapture;
     private Boolean countRegressive;
 
+    // contador de erro
+    private CountDownTimer errorCountDownTimer;
+    private Boolean forcedManualCapture = Boolean.FALSE;
 
     private static CameraBioManager cameraBioManager;
 
@@ -354,7 +358,6 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
                                 }
                                 else {
                                     markRed();
-                                    takePictureImageButton.setEnabled(false);
                                 }
                                 // exibe as grides em tela (caso ativo)
                                 if (showLines) {
@@ -368,20 +371,20 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
                             else {
                                 erroIndex = 7;
                                 markRed();
-                                takePictureImageButton.setEnabled(false);
                             }
                         }
                         else {
                             erroIndex = 7;
                             markRed();
-                            takePictureImageButton.setEnabled(false);
                         }
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
 
-                                if (erroIndex != -1) {
+                                if (erroIndex != -1 && forcedManualCapture) {
+                                    showFastToast(manualCaptureMessage);
+                                } else if (erroIndex != -1) {
                                     showFastToast(mensagens[erroIndex]);
                                 } else if (toast != null) {
                                     toast.cancel();
@@ -439,6 +442,32 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
         }
     }
 
+    private void destroyErrorTimer () {
+        if (errorCountDownTimer != null) {
+            errorCountDownTimer.cancel();
+            errorCountDownTimer = null;
+        }
+    }
+
+    private void createErrorTimer () {
+        if (errorCountDownTimer == null && !forcedManualCapture) {
+            takePictureImageButton.setEnabled(false);
+            errorCountDownTimer = new CountDownTimer(5000, 1000) {
+
+                public void onTick(long millisUntilFinished) {}
+
+                public void onFinish() {
+                    autoCapture = Boolean.FALSE;
+                    forcedManualCapture = Boolean.TRUE;
+                    takePictureImageButton.setEnabled(true);
+                    markBlue();
+                }
+
+            };
+            errorCountDownTimer.start();
+        }
+    }
+
     private void autoCapture () {
 
         if(countDownTimer == null && isRequestImage == false) {
@@ -469,6 +498,7 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
     }
 
     private void markBlue() {
+        destroyErrorTimer();
 
         erroIndex =-1;
 
@@ -492,8 +522,9 @@ public class SelfieActivity extends Camera2Base implements ImageProcessor, Captu
 
     private void markRed() {
         destroyTimer();
+        createErrorTimer();
 
-        if (!countDownCancelled[0]) {
+        if (!countDownCancelled[0] && !forcedManualCapture) {
             int size = 18;
             if (screenWidth > 1600) {
                 size = 34;
